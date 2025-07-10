@@ -1,0 +1,50 @@
+[
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/src/actors/actor.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/actors/actor.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/actors/actor.cpp",
+  "output": "CMakeFiles/app.dir/src/actors/actor.cpp.o"
+},
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/src/states/app_state.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/states/app_state.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/states/app_state.cpp",
+  "output": "CMakeFiles/app.dir/src/states/app_state.cpp.o"
+},
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/src/states/screen_state.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/states/screen_state.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/states/screen_state.cpp",
+  "output": "CMakeFiles/app.dir/src/states/screen_state.cpp.o"
+},
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/src/texture_manager/texture_manager.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/texture_manager/texture_manager.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/texture_manager/texture_manager.cpp",
+  "output": "CMakeFiles/app.dir/src/texture_manager/texture_manager.cpp.o"
+},
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/src/scene/scene.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/scene/scene.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/scene/scene.cpp",
+  "output": "CMakeFiles/app.dir/src/scene/scene.cpp.o"
+},
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/src/screen/screen.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/screen/screen.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/src/screen/screen.cpp",
+  "output": "CMakeFiles/app.dir/src/screen/screen.cpp.o"
+},
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/game.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/game.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/game.cpp",
+  "output": "CMakeFiles/app.dir/game.cpp.o"
+},
+{
+  "directory": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/build",
+  "command": "/usr/bin/c++  -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/SDL3Test -I/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/include -std=gnu++23 -o CMakeFiles/app.dir/main.cpp.o -c /home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/main.cpp",
+  "file": "/home/pedrozoz/Repositories/sdl3-game-dev-boilerplate/main.cpp",
+  "output": "CMakeFiles/app.dir/main.cpp.o"
+}
+]
