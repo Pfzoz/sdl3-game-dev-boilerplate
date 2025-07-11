@@ -10,7 +10,7 @@ include_directories(SDL3Test ${SDL3_INCLUDE_DIRS})
 find_package(SDL3_image REQUIRED)
 include_directories(${SDL3_INCLUDE_DIRS} ${SDL3_image_INCLUDE_DIRS})
 
-include_directories(include)
+include_directories(src/include)
 
 set(SOURCES
     src/actors/actor.cpp
