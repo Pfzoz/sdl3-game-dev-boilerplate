@@ -19,8 +19,8 @@ set(SOURCES
     src/texture_manager/texture_manager.cpp
     src/scene/scene.cpp
     src/screen/screen.cpp
-    game.cpp
-    main.cpp
+    src/game.cpp
+    src/main.cpp
 )
 
 add_executable(app ${SOURCES})
