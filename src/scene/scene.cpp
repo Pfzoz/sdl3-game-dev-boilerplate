@@ -6,22 +6,21 @@
 #include <SDL3/SDL_oldnames.h>
 #include <SDL3/SDL_render.h>
 #include <algorithm>
-#include <memory>
 #include <string>
 
 Scene::~Scene() {
     this->actors.clear();
 }
 
-void Scene::add_actor(std::shared_ptr<Actor> actor) {
+void Scene::add_actor(Actor* actor) {
     actors.push_back(actor);
     actor->scene = this;
-    set_z_index(actors.back().get(), actor->get_z_index());
+    set_z_index(actors.back(), actor->get_z_index());
 }
 
 void Scene::remove_actor(Actor* actor) {
     for (int i = actors.size() - 1; i >= 0; --i) {
-        if (actors[i].get() == actor) {
+        if (actors[i] == actor) {
             actors.erase(actors.begin() + i);
             break;
         }
@@ -30,7 +29,7 @@ void Scene::remove_actor(Actor* actor) {
 
 void Scene::remove_actor(std::string name) {
     for (int i = actors.size() - 1; i >= 0; --i) {
-        if (actors[i].get()->name == name) {
+        if (actors[i]->name == name) {
             actors.erase(actors.begin() + i);
             break;
         }
@@ -55,19 +54,10 @@ void Scene::draw(App_State *context) {
     SDL_RenderPresent(context->renderer);
 }
 
-Actor *Scene::get_actor(Actor *actor) {
-    for (std::shared_ptr<Actor>& actor : actors) {
-        if (actor == actor) {
-            return actor.get();
-        }
-    }
-    return nullptr;
-}
-
 Actor *Scene::get_actor(std::string name) {
-    for (std::shared_ptr<Actor>& actor : actors) {
+    for (Actor* actor : actors) {
         if (actor->name == name) {
-            return actor.get();
+            return actor;
         }
     }
     return nullptr;
@@ -78,13 +68,13 @@ void Scene::handle_event(App_State *app_state) {
         bool first_hit = true;
         Actor *first_touched = nullptr;
         for (int i = actors.size() - 1; i > -1; i--) {
-            std::shared_ptr<Actor> actor = actors[i];
+            Actor* actor = actors[i];
             float x = app_state->event.button.x;
             float y = app_state->event.button.y;
             bool touched = actor->touches(app_state, {x, y});
             actor->on_click(app_state, touched, touched && first_hit);
             if (touched && first_hit) {
-                first_touched = actor.get();
+                first_touched = actor;
             }
             if (touched) first_hit = false;
         }
@@ -94,7 +84,7 @@ void Scene::handle_event(App_State *app_state) {
 
 int Scene::get_actor_index(Actor *actor) {
     for (int i = 0; i < actors.size(); i++) {
-        if (actors[i].get() == actor) {
+        if (actors[i] == actor) {
             return i;
         }
     }
@@ -102,11 +92,11 @@ int Scene::get_actor_index(Actor *actor) {
 }
 
 void Scene::sort_actors() {
-    std::sort(actors.begin(), actors.end(), [](const std::shared_ptr<Actor>& a, const std::shared_ptr<Actor>& b) {
+    std::sort(actors.begin(), actors.end(), [](const Actor* a, const Actor* b) {
         return a->_z_index < b->_z_index;
     });
     int z_counter = 0;
-    for (std::shared_ptr<Actor> actor : actors) {
+    for (Actor* actor : actors) {
         if (actor->_z_index > z_counter) {
             actor->_z_index = z_counter;
         } else {

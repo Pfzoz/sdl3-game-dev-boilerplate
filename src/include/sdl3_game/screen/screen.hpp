@@ -1,8 +1,8 @@
-#ifndef SCREEN_HPP
-#define SCREEN_HPP
+#pragma once
 
 #include "sdl3_game/scene/scene.hpp"
 #include "sdl3_game/states/app_state.hpp"
+
 class Screen {
 public:
     std::string name = "Screen Title";
@@ -14,5 +14,3 @@ public:
     virtual void render(App_State *app_state);
     virtual void handle_event(App_State *app_state);
 };
-
-#endif

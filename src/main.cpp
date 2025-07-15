@@ -12,21 +12,19 @@
 #include "game.hpp"
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
-    App_State *global_app_state = App_State::init_state();
-    if (!global_app_state->is_initialized()) {
+    App_State global_app_state = SDL3_Game::get_state();
+    if (!global_app_state.initialized) {
         return SDL_APP_FAILURE;
     }
-    *appstate = global_app_state;
-    game_init(global_app_state);
+    game_init(&global_app_state);
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
     App_State *global_app_state = (App_State*) appstate;
-    global_app_state->update();
     SDL_RenderClear(global_app_state->renderer);
     game_loop(global_app_state);
-    if (global_app_state->get_quit()) {
+    if (SDL3_Game::Core::is_quit()) {
         game_close(global_app_state);
         return SDL_APP_SUCCESS;
     }
@@ -42,6 +40,5 @@ SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
 
 void SDL_AppQuit(void *appstate, SDL_AppResult result) {
     App_State *global_app_state = (App_State*) appstate;
-    global_app_state->destroy();
     SDL_Quit();
 }

@@ -24,7 +24,7 @@ void handle_event(App_State *context) {
     }
     if (context->event.type == SDL_EVENT_QUIT) {
         SDL_Log("Quitting...");
-        context->set_quit(true);
+        SDL3_Game::quit();
     }
     screen_state->handle_event(context);
 }

@@ -16,7 +16,7 @@ set(SOURCES
     src/actors/actor.cpp
     src/states/app_state.cpp
     src/states/screen_state.cpp
-    src/texture_manager/texture_manager.cpp
+    src/texture_management/texture_management.cpp
     src/scene/scene.cpp
     src/screen/screen.cpp
     src/game.cpp
