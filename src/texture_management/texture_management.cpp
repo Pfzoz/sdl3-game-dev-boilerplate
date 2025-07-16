@@ -40,6 +40,6 @@ void SDL3_Game::unload_texture(const std::string &file_path) {
     }
 }
 
-void SDL3_Game::clear() {
+void SDL3_Game::clear_textures() {
     textures.clear();
 }

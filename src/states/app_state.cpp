@@ -1,4 +1,5 @@
 #include "sdl3_game/states/app_state.hpp"
+#include "sdl3_game/texture_management/texture_management.hpp"
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_log.h>
 #include <SDL3_image/SDL_image.h>
@@ -9,8 +10,6 @@
 Uint64 current_timestamp = 0, last_timestamp = 0;
 
 App_State state;
-
-bool is_quitting = false;
 
 bool SDL3_Game::Core::init() {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
@@ -31,20 +30,20 @@ bool SDL3_Game::Core::init() {
     return true;
 }
 
-bool SDL3_Game::Core::is_quit() {
-    return is_quitting;
-}
-
 double SDL3_Game::get_delta() {
     last_timestamp = current_timestamp;
     current_timestamp = SDL_GetPerformanceCounter();
     return ((current_timestamp - last_timestamp) / (double)SDL_GetPerformanceFrequency());
 }
 
-const App_State& SDL3_Game::get_state() {
+App_State& SDL3_Game::get_state() {
     return state;
 }
 
 void SDL3_Game::quit() {
-    is_quitting = true;
+    SDL_QuitSubSystem(SDL_INIT_VIDEO);
+    if (state.window != nullptr) SDL_DestroyWindow(state.window);
+    if (state.renderer != nullptr) SDL_DestroyRenderer(state.renderer);
+    SDL3_Game::clear_textures();
+    SDL_Quit();
 }

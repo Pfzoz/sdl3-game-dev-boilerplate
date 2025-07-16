@@ -19,24 +19,20 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
-    App_State *global_app_state = (App_State*) appstate;
+    App_State *global_app_state = &SDL3_Game::get_state();
     SDL_RenderClear(global_app_state->renderer);
     game_loop(global_app_state);
-    if (SDL3_Game::Core::is_quit()) {
-        game_close(global_app_state);
-        return SDL_APP_SUCCESS;
-    }
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
-    App_State *global_app_state = (App_State*) appstate;
+    App_State *global_app_state = &SDL3_Game::get_state();
     global_app_state->event = *event;
     handle_event(global_app_state);
     return SDL_APP_CONTINUE;
 }
 
 void SDL_AppQuit(void *appstate, SDL_AppResult result) {
-    App_State *global_app_state = (App_State*) appstate;
+    App_State *global_app_state = &SDL3_Game::get_state();
     SDL_Quit();
 }

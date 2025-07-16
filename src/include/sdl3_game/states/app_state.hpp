@@ -15,10 +15,9 @@ namespace SDL3_Game {
 
     namespace Core {
         bool init();
-        bool is_quit();
     }
 
-    const App_State &get_state();
+    App_State &get_state();
     double get_delta();
     void quit();
 }
