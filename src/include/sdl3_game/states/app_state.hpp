@@ -5,7 +5,6 @@ struct SDL_Renderer;
 struct SDL_Window;
 
 struct App_State {
-    bool initialized = false;
     SDL_Event event;
     int screen_height = 800, screen_width = 600;
     SDL_Renderer *renderer = nullptr;

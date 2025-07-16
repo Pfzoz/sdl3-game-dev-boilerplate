@@ -12,11 +12,9 @@
 #include "game.hpp"
 
 SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
-    App_State global_app_state = SDL3_Game::get_state();
-    if (!global_app_state.initialized) {
+    if (!SDL3_Game::Core::init()) {
         return SDL_APP_FAILURE;
     }
-    game_init(&global_app_state);
     return SDL_APP_CONTINUE;
 }
 
