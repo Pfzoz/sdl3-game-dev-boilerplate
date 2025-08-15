@@ -11,7 +11,7 @@ struct App_State {
     SDL_Window *window = nullptr;
 };
 
-namespace SDL3_Game {
+namespace Game {
 
     namespace Core {
         bool init();

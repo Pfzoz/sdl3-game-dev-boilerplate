@@ -1,6 +1,6 @@
 #include "sdl3_game/scene/scene.hpp"
 #include "sdl3_game/actors/actor.hpp"
-#include "sdl3_game/states/app_state.hpp"
+#include "sdl3_game/states/app.hpp"
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_log.h>
 #include <SDL3/SDL_oldnames.h>

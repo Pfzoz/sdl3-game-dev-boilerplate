@@ -1,7 +1,7 @@
 #pragma once
 
 #include "sdl3_game/scene/scene.hpp"
-#include "sdl3_game/states/app_state.hpp"
+struct App_State;
 
 class Screen {
 public:

@@ -1,9 +1,11 @@
 #ifndef ACTOR_HPP
 #define ACTOR_HPP
 
-#include "sdl3_game/states/app_state.hpp"
-#include <SDL3/SDL_rect.h>
 #include <string>
+
+struct App_State;
+struct SDL_FRect;
+struct SDL_FPoint;
 
 class Actor {
 public:

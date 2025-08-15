@@ -1,4 +1,4 @@
-#include "sdl3_game/states/app_state.hpp"
+#include "sdl3_game/states/app.hpp"
 #include "sdl3_game/texture_management/texture_management.hpp"
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_log.h>
@@ -11,7 +11,7 @@ Uint64 current_timestamp = 0, last_timestamp = 0;
 
 App_State state;
 
-bool SDL3_Game::Core::init() {
+bool Game::Core::init() {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
         SDL_Log("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         return false;
@@ -30,20 +30,20 @@ bool SDL3_Game::Core::init() {
     return true;
 }
 
-double SDL3_Game::get_delta() {
+double Game::get_delta() {
     last_timestamp = current_timestamp;
     current_timestamp = SDL_GetPerformanceCounter();
     return ((current_timestamp - last_timestamp) / (double)SDL_GetPerformanceFrequency());
 }
 
-App_State& SDL3_Game::get_state() {
+App_State& Game::get_state() {
     return state;
 }
 
-void SDL3_Game::quit() {
+void Game::quit() {
     SDL_QuitSubSystem(SDL_INIT_VIDEO);
     if (state.window != nullptr) SDL_DestroyWindow(state.window);
     if (state.renderer != nullptr) SDL_DestroyRenderer(state.renderer);
-    SDL3_Game::clear_textures();
+    Game::Textures::clear_textures();
     SDL_Quit();
 }

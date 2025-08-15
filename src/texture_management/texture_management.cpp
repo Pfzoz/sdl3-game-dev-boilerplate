@@ -1,5 +1,5 @@
 #include "sdl3_game/texture_management/texture_management.hpp"
-#include "sdl3_game/states/app_state.hpp"
+#include "sdl3_game/states/app.hpp"
 #include <SDL3/SDL_error.h>
 #include <SDL3/SDL_surface.h>
 #include <SDL3_image/SDL_image.h>
@@ -13,8 +13,8 @@ struct SDL_Texture_Deleter {
 
 std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>> textures;
 
-SDL_Texture* SDL3_Game::load_texture(const std::string &file_path) {
-    const App_State context = SDL3_Game::get_state();
+SDL_Texture* Game::Textures::load_texture(const std::string &file_path) {
+    const App_State context = Game::get_state();
     if (textures[file_path] != nullptr) {
         return textures[file_path].get();
     }
@@ -33,13 +33,13 @@ SDL_Texture* SDL3_Game::load_texture(const std::string &file_path) {
     return texture;
 }
 
-void SDL3_Game::unload_texture(const std::string &file_path) {
+void Game::Textures::unload_texture(const std::string &file_path) {
     SDL_Texture *texture = textures[file_path].get();
     if (texture != nullptr) {
         textures.erase(file_path);
     }
 }
 
-void SDL3_Game::clear_textures() {
+void Game::Textures::clear_textures() {
     textures.clear();
 }

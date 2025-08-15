@@ -3,18 +3,16 @@
 #include <SDL3/SDL_log.h>
 #include <SDL3/SDL_scancode.h>
 #include "sdl3_game/screen/screen.hpp"
-#include "sdl3_game/states/app_state.hpp"
-#include "sdl3_game/states/screen_state.hpp"
+#include "sdl3_game/states/app.hpp"
+#include "sdl3_game/states/screens.hpp"
 #include "game.hpp"
 
-Screen_State *screen_state = Screen_State::init_state();
-
 void game_init(App_State *context) {
-    screen_state->load_screen(context, new Screen);
+    Game::Screens::load_screen(context, new Screen);
 }
 
 void game_loop(App_State *context) {
-    screen_state->render(context);
+    Game::Screens::render(context);
 }
 
 void handle_event(App_State *context) {
@@ -24,11 +22,11 @@ void handle_event(App_State *context) {
     }
     if (context->event.type == SDL_EVENT_QUIT) {
         SDL_Log("Quitting...");
-        SDL3_Game::quit();
+        Game::quit();
     }
-    screen_state->handle_event(context);
+    Game::Screens::handle_event(context);
 }
 
 void game_close(App_State *context) {
-    screen_state->close_screen(context);
+    Game::Screens::close_screen(context);
 }

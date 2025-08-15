@@ -1,9 +1,10 @@
 #pragma once
 
 #include "sdl3_game/actors/actor.hpp"
-#include "sdl3_game/states/app_state.hpp"
 #include <string>
 #include <vector>
+
+struct App_State;
 
 class Scene {
 private:
