@@ -16,19 +16,10 @@ set(LIB_SOURCES
     src/screen/screen.cpp
 )
 
-set(LIB_HEADERS
-    src/include/actors/actor.hpp
-    src/include/states/game.hpp
-    src/include/states/screens.hpp
-    src/include/texture_management/texture_management.hpp
-    src/include/scene/scene.hpp
-    src/include/screen/screen.hpp
-)
-
 add_library(SDL3Game ${LIB_SOURCES} ${LIB_HEADERS})
 
 target_include_directories(SDL3Game PUBLIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/src
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/include
 )
 
 target_link_libraries(SDL3Game PUBLIC
