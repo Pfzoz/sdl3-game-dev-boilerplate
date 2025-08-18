@@ -2,11 +2,11 @@
 
 #include <memory>
 class Screen;
-struct App_State;
+struct Game_State;
 
 namespace Game::Screens {
-    void load_screen(App_State *app_state, std::unique_ptr<Screen> screen);
-    void close_screen(App_State *app_state);
-    void render(App_State *app_state);
-    void handle_event(App_State *app_state);
+    void load_screen(Game_State *app_state, std::unique_ptr<Screen> screen);
+    void close_screen(Game_State *app_state);
+    void render(Game_State *app_state);
+    void handle_event(Game_State *app_state);
 }

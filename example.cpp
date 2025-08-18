@@ -4,7 +4,7 @@
 #include <memory>
 #define SDL_MAIN_USE_CALLBACKS
 #include <SDL3/SDL_main.h>
-#include "sdl3_game/states/app.hpp"
+#include "sdl3_game/states/game.hpp"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_render.h>
 #include <SDL3/SDL_surface.h>
@@ -18,19 +18,23 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
         return SDL_APP_FAILURE;
     }
     *appstate = &Game::get_state();
-    Game::Screens::load_screen((App_State*) *appstate, std::make_unique<Screen>());
+    Game::Screens::load_screen((Game_State*) *appstate, std::make_unique<Screen>());
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
-    App_State *app_state = (App_State*) appstate;
-    SDL_RenderClear(app_state->renderer);
+    Game::Core::update();
+    Game::Screens::render((Game_State*) appstate);
+    SDL_RenderClear(Game::get_renderer());
+    SDL_RenderPresent(Game::get_renderer());
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
-    App_State *app_state = (App_State*) appstate;
-    app_state->event = *event;
+    Game::Core::handle_event(*event);
+    if (Game::get_state().event.type == SDL_EVENT_QUIT) {
+        return SDL_APP_SUCCESS;
+    }
     return SDL_APP_CONTINUE;
 }
 

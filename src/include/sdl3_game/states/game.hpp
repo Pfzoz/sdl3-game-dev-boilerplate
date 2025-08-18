@@ -4,20 +4,23 @@
 struct SDL_Renderer;
 struct SDL_Window;
 
-struct App_State {
+struct Game_State {
     SDL_Event event;
     int screen_height = 800, screen_width = 600;
-    SDL_Renderer *renderer = nullptr;
-    SDL_Window *window = nullptr;
 };
 
 namespace Game {
 
     namespace Core {
         bool init();
+        void handle_event(SDL_Event &event);
+        void update();
     }
 
-    App_State &get_state();
+    Game_State &get_state();
     double get_delta();
     void quit();
+
+    SDL_Window *get_window();
+    SDL_Renderer *get_renderer();
 }

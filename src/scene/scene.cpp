@@ -1,6 +1,6 @@
 #include "sdl3_game/scene/scene.hpp"
 #include "sdl3_game/actors/actor.hpp"
-#include "sdl3_game/states/app.hpp"
+#include "sdl3_game/states/game.hpp"
 #include <SDL3/SDL_events.h>
 #include <SDL3/SDL_log.h>
 #include <SDL3/SDL_oldnames.h>
@@ -46,12 +46,12 @@ void Scene::update(float delta) {
     }
 }
 
-void Scene::draw(App_State *context) {
+void Scene::draw(Game_State *context) {
     for (auto& actor : actors) {
         if (!actor->visible) continue;
         actor->draw(context);
     }
-    SDL_RenderPresent(context->renderer);
+    SDL_RenderPresent(Game::get_renderer());
 }
 
 Actor *Scene::get_actor(std::string name) {
@@ -63,7 +63,7 @@ Actor *Scene::get_actor(std::string name) {
     return nullptr;
 }
 
-void Scene::handle_event(App_State *app_state) {
+void Scene::handle_event(Game_State *app_state) {
     if (app_state->event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
         bool first_hit = true;
         Actor *first_touched = nullptr;
@@ -111,6 +111,6 @@ void Scene::set_z_index(Actor *actor, int z_index) {
     sort_actors();
 }
 
-void Scene::set_on_click_event(void (*event)(App_State *app_state, Actor *actor)) {
+void Scene::set_on_click_event(void (*event)(Game_State *app_state, Actor *actor)) {
     this->click_event = event;
 }

@@ -14,13 +14,12 @@ include_directories(src/include)
 
 set(SOURCES
     src/actors/actor.cpp
-    src/states/app.cpp
+    src/states/game.cpp
     src/states/screens.cpp
     src/texture_management/texture_management.cpp
     src/scene/scene.cpp
     src/screen/screen.cpp
-    src/game.cpp
-    src/main.cpp
+    example.cpp
 )
 
 add_executable(app ${SOURCES})

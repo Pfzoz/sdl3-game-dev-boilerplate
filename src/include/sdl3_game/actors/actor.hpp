@@ -3,7 +3,7 @@
 
 #include <string>
 
-struct App_State;
+struct Game_State;
 struct SDL_FRect;
 struct SDL_FPoint;
 
@@ -19,18 +19,18 @@ public:
 
     int get_z_index();
     SDL_FRect get_rect();
-    virtual void draw(App_State *app_state);
+    virtual void draw(Game_State *app_state);
     virtual void act(float delta);
-    virtual bool touches(App_State *app_state, SDL_FPoint rect);
+    virtual bool touches(Game_State *app_state, SDL_FPoint rect);
 
     void scale(float s);
 
-    void on_click(App_State *app_state, bool touched, bool first_hit);
-    void set_click_event(void (*event)(App_State *app_state, Actor *actor, bool touched, bool first_hit)) {
+    void on_click(Game_State *app_state, bool touched, bool first_hit);
+    void set_click_event(void (*event)(Game_State *app_state, Actor *actor, bool touched, bool first_hit)) {
         click_event = event;
     }
 private:
-    void (*click_event)(App_State *app_state, Actor *actor, bool touched, bool first_hit) = nullptr;
+    void (*click_event)(Game_State *app_state, Actor *actor, bool touched, bool first_hit) = nullptr;
 };
 
 #endif

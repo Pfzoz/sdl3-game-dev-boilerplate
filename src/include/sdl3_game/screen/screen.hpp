@@ -1,7 +1,7 @@
 #pragma once
 
 #include "sdl3_game/scene/scene.hpp"
-struct App_State;
+struct Game_State;
 
 class Screen {
 public:
@@ -9,8 +9,8 @@ public:
     Scene scene;
     Screen();
     ~Screen();
-    virtual void on_load(App_State *app_state); // Every time it is opened on the app state
-    virtual void on_close(App_State *app_state); // Every time it is closed on the app state
-    virtual void render(App_State *app_state);
-    virtual void handle_event(App_State *app_state);
+    virtual void on_load(Game_State *app_state); // Every time it is opened on the app state
+    virtual void on_close(Game_State *app_state); // Every time it is closed on the app state
+    virtual void render(Game_State *app_state);
+    virtual void handle_event(Game_State *app_state);
 };

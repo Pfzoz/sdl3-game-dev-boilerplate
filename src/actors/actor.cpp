@@ -1,5 +1,5 @@
 #include "sdl3_game/actors/actor.hpp"
-#include "sdl3_game/states/app.hpp"
+#include "sdl3_game/states/game.hpp"
 #include <SDL3/SDL_log.h>
 #include <SDL3/SDL_rect.h>
 
@@ -20,13 +20,13 @@ void Actor::scale(float s) {
 }
 
 void Actor::act(float delta) {}
-void Actor::draw(App_State *app_state) {}
-void Actor::on_click(App_State *app_state, bool touched, bool first_hit) {
+void Actor::draw(Game_State *app_state) {}
+void Actor::on_click(Game_State *app_state, bool touched, bool first_hit) {
     if (click_event == nullptr) return;
     click_event(app_state, this, touched, first_hit);
 }
 
-bool Actor::touches(App_State *app_state, SDL_FPoint point) {
+bool Actor::touches(Game_State *app_state, SDL_FPoint point) {
     if (point.x > this->screen_x + this->width || point.y > this->screen_y + this->height)
         return false;
     if (point.x < this->screen_x || point.y < this->screen_y)

@@ -4,7 +4,7 @@
 #include <string>
 #include <vector>
 
-struct App_State;
+struct Game_State;
 
 class Scene {
 private:
@@ -14,22 +14,22 @@ private:
     void sort_actors();
 
     // events
-    void (*click_event)(App_State *app_state, Actor *first_touched) = nullptr;
+    void (*click_event)(Game_State *app_state, Actor *first_touched) = nullptr;
 
 public:
     Scene() = default;
     ~Scene();
 
     void update(float delta);
-    void draw(App_State* context);
+    void draw(Game_State* context);
     Actor *get_actor(std::string name);
     void add_actor(Actor* actor);
     void remove_actor(Actor* actor);
     void remove_actor(std::string name);
     void clear_actors();
-    void handle_event(App_State *app_state);
+    void handle_event(Game_State *app_state);
     void set_z_index(Actor* actor, int z_index);
 
     // events setters
-    void set_on_click_event(void (*event)(App_State *app_state, Actor *actor));
+    void set_on_click_event(void (*event)(Game_State *app_state, Actor *actor));
 };
