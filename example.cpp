@@ -1,5 +1,4 @@
 #include "sdl3_game/screen/screen.hpp"
-#include "sdl3_game/states/screens.hpp"
 #include <SDL3/SDL_init.h>
 #include <memory>
 #define SDL_MAIN_USE_CALLBACKS
@@ -18,13 +17,13 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
         return SDL_APP_FAILURE;
     }
     *appstate = &Game::get_state();
-    Game::Screens::load_screen((Game_State*) *appstate, std::make_unique<Screen>());
+    Game::load_screen((Game_State*) *appstate, std::make_unique<Screen>());
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
     Game::Core::update();
-    Game::Screens::render((Game_State*) appstate);
+    Game::render((Game_State*) appstate);
     SDL_RenderClear(Game::get_renderer());
     SDL_RenderPresent(Game::get_renderer());
     return SDL_APP_CONTINUE;

@@ -1,4 +1,5 @@
 #include "sdl3_game/states/game.hpp"
+#include "sdl3_game/screen/screen.hpp"
 #include "sdl3_game/texture_management/texture_management.hpp"
 #include <SDL3/SDL_init.h>
 #include <SDL3/SDL_log.h>
@@ -89,4 +90,33 @@ void Game::Core::handle_event(SDL_Event &event) {
 
 void Game::Core::update() {
     delta = update_delta();
+}
+
+// Screen management
+
+std::unique_ptr<Screen> screen;
+
+void Game::render(Game_State *app_state) {
+    if (screen == nullptr) return;
+    screen->render(app_state);
+}
+
+void Game::handle_event(Game_State *app_state) {
+    if (screen == nullptr) return;
+    screen->handle_event(app_state);
+}
+
+void Game::close_screen(Game_State *app_state) {
+    if (screen == nullptr) return;
+    screen->on_close(app_state);
+    screen.reset();
+}
+
+void Game::load_screen(Game_State *app_state, std::unique_ptr<Screen> new_screen) {
+    if (screen != nullptr) {
+        screen->on_close(app_state);
+    }
+    screen = std::move(new_screen);
+    screen->on_load(app_state);
+    SDL_SetWindowTitle(Game::get_window(), screen->name.c_str());
 }

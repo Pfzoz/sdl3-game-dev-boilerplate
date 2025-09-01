@@ -10,7 +10,6 @@ find_package(SDL3_image REQUIRED)
 set(LIB_SOURCES
     src/actors/actor.cpp
     src/states/game.cpp
-    src/states/screens.cpp
     src/texture_management/texture_management.cpp
     src/scene/scene.cpp
     src/screen/screen.cpp
