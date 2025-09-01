@@ -27,6 +27,7 @@ struct SDLRendererDeleter {
 std::unique_ptr<SDL_Window, SDLWindowDeleter> window;
 std::unique_ptr<SDL_Renderer, SDLRendererDeleter> renderer;
 
+std::unique_ptr<Screen> screen;
 Game_State state;
 
 // Helper functions //
@@ -86,6 +87,7 @@ void Game::quit() {
 
 void Game::Core::handle_event(SDL_Event &event) {
     state.event = event;
+    if (screen != nullptr) screen->handle_event(&state);
     switch (event.type) {
         case SDL_EVENT_WINDOW_RESIZED:
             state.screen_width = event.window.data1;
@@ -102,16 +104,9 @@ void Game::Core::update() {
 
 // Screen management
 
-std::unique_ptr<Screen> screen;
-
 void Game::Core::render(Game_State *app_state) {
     if (screen == nullptr) return;
     screen->render(app_state);
-}
-
-void Game::Core::handle_event(Game_State *app_state) {
-    if (screen == nullptr) return;
-    screen->handle_event(app_state);
 }
 
 void Game::close_screen(Game_State *app_state) {

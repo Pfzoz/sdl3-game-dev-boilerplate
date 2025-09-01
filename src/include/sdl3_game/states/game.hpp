@@ -19,7 +19,6 @@ namespace Game {
         void handle_event(SDL_Event &event);
         void update();
         void render(Game_State *app_state);
-        void handle_event(Game_State *app_state);
     }
 
     Game_State &get_state();
