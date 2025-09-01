@@ -18,6 +18,8 @@ namespace Game {
         bool init();
         void handle_event(SDL_Event &event);
         void update();
+        void render(Game_State *app_state);
+        void handle_event(Game_State *app_state);
     }
 
     Game_State &get_state();
@@ -29,6 +31,4 @@ namespace Game {
 
     void load_screen(Game_State *app_state, std::unique_ptr<Screen> screen);
     void close_screen(Game_State *app_state);
-    void render(Game_State *app_state);
-    void handle_event(Game_State *app_state);
 }

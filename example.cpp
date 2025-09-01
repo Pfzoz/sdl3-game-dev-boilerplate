@@ -23,7 +23,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
     Game::Core::update();
-    Game::render((Game_State*) appstate);
+    Game::Core::render((Game_State*) appstate);
     SDL_RenderClear(Game::get_renderer());
     SDL_RenderPresent(Game::get_renderer());
     return SDL_APP_CONTINUE;

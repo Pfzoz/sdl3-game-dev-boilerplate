@@ -29,11 +29,35 @@ std::unique_ptr<SDL_Renderer, SDLRendererDeleter> renderer;
 
 Game_State state;
 
+// Helper functions //
+
 double update_delta() {
     last_timestamp = current_timestamp;
     current_timestamp = SDL_GetPerformanceCounter();
     return ((current_timestamp - last_timestamp) / (double)SDL_GetPerformanceFrequency());
 }
+
+// Main functions //
+
+// Getters
+
+Game_State& Game::get_state() {
+    return state;
+}
+
+double Game::get_delta() {
+    return delta;
+}
+
+SDL_Window *Game::get_window() {
+    return window.get();
+}
+
+SDL_Renderer *Game::get_renderer() {
+    return renderer.get();
+}
+
+//
 
 bool Game::Core::init() {
     if (!SDL_Init(SDL_INIT_VIDEO)) {
@@ -54,26 +78,10 @@ bool Game::Core::init() {
     return true;
 }
 
-Game_State& Game::get_state() {
-    return state;
-}
-
-double Game::get_delta() {
-    return delta;
-}
-
 void Game::quit() {
     SDL_QuitSubSystem(SDL_INIT_VIDEO);
     Game::Textures::clear_textures();
     SDL_Quit();
-}
-
-SDL_Window *Game::get_window() {
-    return window.get();
-}
-
-SDL_Renderer *Game::get_renderer() {
-    return renderer.get();
 }
 
 void Game::Core::handle_event(SDL_Event &event) {
@@ -96,12 +104,12 @@ void Game::Core::update() {
 
 std::unique_ptr<Screen> screen;
 
-void Game::render(Game_State *app_state) {
+void Game::Core::render(Game_State *app_state) {
     if (screen == nullptr) return;
     screen->render(app_state);
 }
 
-void Game::handle_event(Game_State *app_state) {
+void Game::Core::handle_event(Game_State *app_state) {
     if (screen == nullptr) return;
     screen->handle_event(app_state);
 }
