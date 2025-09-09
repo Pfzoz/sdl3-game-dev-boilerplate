@@ -25,3 +25,13 @@ target_link_libraries(SDL3Game PUBLIC
     SDL3::SDL3
     SDL3_image::SDL3_image
 )
+
+add_executable(example example.cpp)
+
+target_include_directories(example PUBLIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/include
+)
+
+target_link_libraries(example PUBLIC
+    SDL3Game
+)

@@ -9,6 +9,7 @@
 #include <SDL3/SDL_video.h>
 #include <memory>
 
+const int DEFAULT_WIDTH = 800, DEFAULT_HEIGHT = 600;
 Uint64 current_timestamp = 0, last_timestamp = 0;
 double delta;
 
@@ -28,7 +29,6 @@ std::unique_ptr<SDL_Window, SDLWindowDeleter> window;
 std::unique_ptr<SDL_Renderer, SDLRendererDeleter> renderer;
 
 std::unique_ptr<Screen> screen;
-Game_State state;
 
 // Helper functions //
 
@@ -41,10 +41,6 @@ double update_delta() {
 // Main functions //
 
 // Getters
-
-Game_State& Game::get_state() {
-    return state;
-}
 
 double Game::get_delta() {
     return delta;
@@ -65,7 +61,7 @@ bool Game::Core::init() {
         SDL_Log("SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
         return false;
     }
-    window = std::unique_ptr<SDL_Window, SDLWindowDeleter>(SDL_CreateWindow("App", state.screen_width, state.screen_height, SDL_WINDOW_RESIZABLE));
+    window = std::unique_ptr<SDL_Window, SDLWindowDeleter>(SDL_CreateWindow("App", DEFAULT_WIDTH, DEFAULT_HEIGHT, SDL_WINDOW_RESIZABLE));
     SDL_SetWindowPosition(window.get(), SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED);
     if (window == NULL) {
         SDL_Log("Window could not be created! SDL_Error: %s\n", SDL_GetError());
@@ -86,16 +82,7 @@ void Game::quit() {
 }
 
 void Game::Core::handle_event(SDL_Event &event) {
-    state.event = event;
-    if (screen != nullptr) screen->handle_event(&state);
-    switch (event.type) {
-        case SDL_EVENT_WINDOW_RESIZED:
-            state.screen_width = event.window.data1;
-            state.screen_height = event.window.data2;
-            break;
-        default:
-            break;
-    }
+    if (screen != nullptr) screen->handle_event(&event);
 }
 
 void Game::Core::update() {
@@ -104,22 +91,22 @@ void Game::Core::update() {
 
 // Screen management
 
-void Game::Core::render(Game_State *app_state) {
+void Game::Core::render() {
     if (screen == nullptr) return;
-    screen->render(app_state);
+    screen->render();
 }
 
-void Game::close_screen(Game_State *app_state) {
+void Game::close_screen() {
     if (screen == nullptr) return;
-    screen->on_close(app_state);
+    screen->on_close();
     screen.reset();
 }
 
-void Game::load_screen(Game_State *app_state, std::unique_ptr<Screen> new_screen) {
+void Game::load_screen(std::unique_ptr<Screen> new_screen) {
     if (screen != nullptr) {
-        screen->on_close(app_state);
+        screen->on_close();
     }
     screen = std::move(new_screen);
-    screen->on_load(app_state);
+    screen->on_load();
     SDL_SetWindowTitle(Game::get_window(), screen->name.c_str());
 }

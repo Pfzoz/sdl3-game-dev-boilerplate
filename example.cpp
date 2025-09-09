@@ -16,14 +16,13 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
     if (!Game::Core::init()) {
         return SDL_APP_FAILURE;
     }
-    *appstate = &Game::get_state();
-    Game::load_screen((Game_State*) *appstate, std::make_unique<Screen>());
+    Game::load_screen(std::make_unique<Screen>());
     return SDL_APP_CONTINUE;
 }
 
 SDL_AppResult SDL_AppIterate(void *appstate) {
     Game::Core::update();
-    Game::Core::render((Game_State*) appstate);
+    Game::Core::render();
     SDL_RenderClear(Game::get_renderer());
     SDL_RenderPresent(Game::get_renderer());
     return SDL_APP_CONTINUE;
@@ -31,7 +30,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 
 SDL_AppResult SDL_AppEvent(void *appstate, SDL_Event *event) {
     Game::Core::handle_event(*event);
-    if (Game::get_state().event.type == SDL_EVENT_QUIT) {
+    if (event->type == SDL_EVENT_QUIT) {
         return SDL_APP_SUCCESS;
     }
     return SDL_APP_CONTINUE;

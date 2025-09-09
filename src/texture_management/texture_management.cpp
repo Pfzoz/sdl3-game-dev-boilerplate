@@ -14,7 +14,6 @@ struct SDL_Texture_Deleter {
 std::unordered_map<std::string, std::unique_ptr<SDL_Texture, SDL_Texture_Deleter>> textures;
 
 SDL_Texture* Game::Textures::load_texture(const std::string &file_path) {
-    const Game_State context = Game::get_state();
     if (textures[file_path] != nullptr) {
         return textures[file_path].get();
     }

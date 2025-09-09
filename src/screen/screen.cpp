@@ -5,7 +5,7 @@
 
 Screen::Screen() {}
 Screen::~Screen() {}
-void Screen::handle_event(Game_State *app_state) {}
-void Screen::on_close(Game_State *app_state) {}
-void Screen::on_load(Game_State *app_state) {}
-void Screen::render(Game_State *app_state) {}
+void Screen::handle_event(SDL_Event *event) {}
+void Screen::on_close() {}
+void Screen::on_load() {}
+void Screen::render() {}

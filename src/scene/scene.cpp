@@ -46,10 +46,10 @@ void Scene::update(float delta) {
     }
 }
 
-void Scene::draw(Game_State *context) {
+void Scene::draw() {
     for (auto& actor : actors) {
         if (!actor->visible) continue;
-        actor->draw(context);
+        actor->draw();
     }
     SDL_RenderPresent(Game::get_renderer());
 }
@@ -63,22 +63,22 @@ Actor *Scene::get_actor(std::string name) {
     return nullptr;
 }
 
-void Scene::handle_event(Game_State *app_state) {
-    if (app_state->event.type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
+void Scene::handle_event(SDL_Event *event) {
+    if (event->type == SDL_EVENT_MOUSE_BUTTON_DOWN) {
         bool first_hit = true;
         Actor *first_touched = nullptr;
         for (int i = actors.size() - 1; i > -1; i--) {
             Actor* actor = actors[i];
-            float x = app_state->event.button.x;
-            float y = app_state->event.button.y;
-            bool touched = actor->touches(app_state, {x, y});
-            actor->on_click(app_state, touched, touched && first_hit);
+            float x = event->button.x;
+            float y = event->button.y;
+            bool touched = actor->touches({x, y});
+            actor->on_click(touched, touched && first_hit);
             if (touched && first_hit) {
                 first_touched = actor;
             }
             if (touched) first_hit = false;
         }
-        if (click_event != nullptr) click_event(app_state, first_touched);
+        if (click_event != nullptr) click_event(first_touched);
     }
 }
 
@@ -111,6 +111,6 @@ void Scene::set_z_index(Actor *actor, int z_index) {
     sort_actors();
 }
 
-void Scene::set_on_click_event(void (*event)(Game_State *app_state, Actor *actor)) {
+void Scene::set_on_click_event(void (*event)(Actor *actor)) {
     this->click_event = event;
 }
