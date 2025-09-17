@@ -27,9 +27,9 @@ public:
     void scale(float s);
 
     void on_click(bool touched, bool first_hit);
-    void set_click_event(std::function<void(Actor *, bool, bool)> event);
+    void set_click_event(std::function<void(Actor *actor, bool touched, bool first_hit)> event);
 private:
-    std::function<void(Actor *, bool, bool)> click_event = nullptr;
+    std::function<void(Actor *actor, bool touched, bool first_hit)> click_event = nullptr;
 };
 
 #endif
