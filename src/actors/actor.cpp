@@ -36,3 +36,7 @@ bool Actor::touches(SDL_FPoint point) {
 int Actor::get_z_index() {
     return _z_index;
 }
+
+void Actor::set_click_event(std::function<void(Actor *, bool, bool)> event) {
+    click_event = event;
+}

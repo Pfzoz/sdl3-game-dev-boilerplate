@@ -2,6 +2,7 @@
 
 #include "sdl3_game/actors/actor.hpp"
 #include <SDL3/SDL_events.h>
+#include <functional>
 #include <string>
 #include <vector>
 
@@ -15,7 +16,7 @@ private:
     void sort_actors();
 
     // events
-    void (*click_event)(Actor *first_touched) = nullptr;
+    std::function<void(Actor *first_touched)> click_event = nullptr;
 
 public:
     Scene() = default;
@@ -32,5 +33,5 @@ public:
     void set_z_index(Actor* actor, int z_index);
 
     // events setters
-    void set_on_click_event(void (*event)(Actor *actor));
+    void set_on_click_event(std::function<void(Actor *first_touched)> event);
 };

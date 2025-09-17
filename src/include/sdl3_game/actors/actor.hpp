@@ -1,6 +1,7 @@
 #ifndef ACTOR_HPP
 #define ACTOR_HPP
 
+#include <functional>
 #include <string>
 
 struct Game_State;
@@ -26,11 +27,9 @@ public:
     void scale(float s);
 
     void on_click(bool touched, bool first_hit);
-    void set_click_event(void (*event)(Actor *actor, bool touched, bool first_hit)) {
-        click_event = event;
-    }
+    void set_click_event(std::function<void(Actor *, bool, bool)> event);
 private:
-    void (*click_event)(Actor *actor, bool touched, bool first_hit) = nullptr;
+    std::function<void(Actor *, bool, bool)> click_event = nullptr;
 };
 
 #endif

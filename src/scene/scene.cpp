@@ -111,6 +111,6 @@ void Scene::set_z_index(Actor *actor, int z_index) {
     sort_actors();
 }
 
-void Scene::set_on_click_event(void (*event)(Actor *actor)) {
+void Scene::set_on_click_event(std::function<void(Actor *first_touched)> event) {
     this->click_event = event;
 }
